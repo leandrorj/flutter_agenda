@@ -104,6 +104,9 @@ class Contact {
   String phone;
   String img;
 
+  //construtor vazio
+  Contact();
+
   Contact.fromMap(Map map) {
     //transforma os dados do mapa p/ o contato
     id = map[idColumn];
