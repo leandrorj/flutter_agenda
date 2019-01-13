@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_agenda/helpers/contact_helper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ContactPage extends StatefulWidget {
   final Contact contact;
@@ -75,6 +76,15 @@ class _ContactPageState extends State<ContactPage> {
                             : AssetImage("images/person.png")),
                   ),
                 ),
+                onTap: () {
+                  ImagePicker.pickImage(source: ImageSource.camera)
+                      .then((file) {
+                    if (file == null) return;
+                    setState(() {
+                      _editContact.img = file.path;
+                    });
+                  });
+                },
               ),
               TextField(
                 controller: _nameController,
@@ -112,7 +122,7 @@ class _ContactPageState extends State<ContactPage> {
     );
   }
 
-  Future <bool>_requestPop() {
+  Future<bool> _requestPop() {
     if (_userEdited) {
       showDialog(
           context: context,
